@@ -137,3 +137,6 @@ gsn-proj/
 # hello_car.py
 py1.pfm
 py1.png
+
+# logs
+logs/

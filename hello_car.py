@@ -8,6 +8,8 @@ client.confirmConnection()
 client.enableApiControl(True)
 car_controls = airsim.CarControls()
 
+start_time = time.time()
+
 while True:
     # get state of the car
     car_state = client.getCarState()
@@ -35,3 +37,9 @@ while True:
         else:
             print("Type %d, size %d" % (response.image_type, len(response.image_data_uint8)))
             airsim.write_file('py1.png', response.image_data_uint8)
+    
+    elapsed_time = time.time() - start_time
+
+    if elapsed_time > 10:
+        client.enableApiControl(False)
+        break
