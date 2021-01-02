@@ -140,3 +140,5 @@ py1.png
 
 # logs
 logs/
+videos/
+tb_logs/

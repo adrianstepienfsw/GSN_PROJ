@@ -42,7 +42,7 @@ class DQN:
         self.min_experiences = min_experiences
 
     def predict(self, inputs):
-        return self.model(np.atleast_2d(inputs.astype('float32')))\
+        return self.model(np.atleast_2d(inputs.astype('float32')))
 
 
     def train(self, TargetNet):
@@ -118,8 +118,7 @@ def play_game(env, TrainNet, TargetNet, epsilon, copy_step):
 
 
 def make_video(env, TrainNet):
-    env = wrappers.Monitor(env, os.path.join(
-        os.getcwd(), "videos"), force=True)
+    env = wrappers.Monitor(env, os.path.join(os.getcwd(), "videos"), force=True)
     rewards = 0
     steps = 0
     done = False
@@ -151,7 +150,7 @@ def main():
                    max_experiences, min_experiences, batch_size, lr)
     TargetNet = DQN(num_states, num_actions, hidden_units, gamma,
                     max_experiences, min_experiences, batch_size, lr)
-    N = 50000
+    N = 4000
     total_rewards = np.empty(N)
     epsilon = 0.99
     decay = 0.9999
@@ -170,7 +169,7 @@ def main():
             print("episode:", n, "episode reward:", total_reward, "eps:", epsilon, "avg reward (last 100):", avg_rewards,
                   "episode loss: ", losses)
     print("avg reward for last 100 episodes:", avg_rewards)
-    make_video(env, TrainNet)
+    # make_video(env, TrainNet)
     env.close()
 
 
