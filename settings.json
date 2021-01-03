@@ -1,0 +1,43 @@
+{
+  "SimMode": "Car",
+  "ClockType": "",
+  "ClockSpeed": 1,
+  "LocalHostIp": "127.0.0.1",
+  "RecordUIVisible": true,
+  "LogMessagesVisible": true,
+  "ViewMode": "",
+  "RpcEnabled": true,
+  "EngineSound": true,
+  "PhysicsEngineName": "",
+  "SpeedUnitFactor": 1.0,
+  "Vehicles": {
+    "PhysXCar": {
+	  "VehicleType": "PhysXCar",
+		"Sensors": {
+			"LidarSensor1": { 
+				"SensorType": 6,
+				"Range": 10,
+				"Enabled" : true,
+				"NumberOfChannels": 16,
+				"RotationsPerSecond": 30,
+				"PointsPerSecond": 10000,
+				"X": 0, "Y": 0, "Z": -1,
+				"Roll": 0, "Pitch": 0, "Yaw" : 0,
+				"VerticalFOVUpper": -5,
+				"VerticalFOVLower": -25,
+				"HorizontalFOVStart": 0,
+				"HorizontalFOVEnd": 360,
+				"DataFrame": "VehicleInertialFrame"
+			}
+		},
+      "DefaultVehicleState": "",
+      "AutoCreate": true,
+      "PawnPath": "",
+      "EnableCollisionPassthrogh": false,
+      "EnableCollisions": true,
+      "RC": {
+        "RemoteControlID": -1
+      }
+    }
+  }
+}
