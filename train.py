@@ -13,7 +13,7 @@ class Trainer(BaseTrainer):
     def __init__(self, sess, model, r_discount_factor=0.99,
                  lr_decay_method='linear', args=None):
         super().__init__(sess, model, args)
-        self.save_every = 20000
+        self.save_every = 300
         self.sess = sess
         self.num_steps = self.model.num_steps
         self.cur_iteration = 0

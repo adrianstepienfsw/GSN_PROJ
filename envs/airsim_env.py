@@ -106,6 +106,18 @@ class AirSimEnv(BaseEnv):
                 np.array([100, -102, z]),
                 np.array([111, -100, z]),
                 np.array([120, -99, z])
+            ],[
+                np.array([-52, -420, z]),
+                np.array([-52, -252, z])
+            ],[
+                np.array([23, -252, z]),
+                np.array([-124, -252, z])
+            ],[
+                np.array([23, -252, z]),
+                np.array([-124, -252, z])
+            ],[
+                np.array([-126, -914, z]),
+                np.array([-124, -170, z])
         ]]
 
         pd = self.state["pose"].position
@@ -133,11 +145,11 @@ class AirSimEnv(BaseEnv):
             reward = reward_dist + reward_speed - 0.5
 
         done = 0
-        if reward < -10:
+        if dist > 20:
             done = 1
-        if self.car_controls.brake == 0:
-            if self.car_state.speed == 0:
-                done = 1
+        #if self.car_controls.brake == 0:
+        if self.car_state.speed == 0:
+                done = -1
         if self.state["collision"]:
             done = 1
         #print(self.distance)
@@ -217,8 +229,13 @@ class AirSimEnv(BaseEnv):
 
     def setup_car(self):
         self.car.reset()
-        pose = airsim.Pose(airsim.Vector3r(23, -83, -0.2), airsim.to_quaternion(0, 0, -1.56))  # PRY in radians
-        self.car.simSetVehiclePose(pose, ignore_collison=True)
+        pose = []
+        rand = np.random.randint(3)
+        #pose.append(airsim.Pose(airsim.Vector3r(23, -83, -0.2), airsim.to_quaternion(0, 0, -1.5)))  # PRY in radians
+        pose.append(airsim.Pose(airsim.Vector3r(-52, -400, -0.2), airsim.to_quaternion(0, 0, 1.5)))  # PRY in radians
+        pose.append(airsim.Pose(airsim.Vector3r(-52, -280, -0.2), airsim.to_quaternion(0, 0, 1.5)))  # PRY in radians
+        pose.append(airsim.Pose(airsim.Vector3r(106, -101, -0.2), airsim.to_quaternion(0, 0, 3.5)))  # PRY in radians
+        self.car.simSetVehiclePose(pose[rand], ignore_collison=True)
         self.car.enableApiControl(True)
         self.car.armDisarm(True)
         time.sleep(0.5)

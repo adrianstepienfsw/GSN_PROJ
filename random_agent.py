@@ -28,18 +28,16 @@ class RandomAgent:
             car_controls.steering = -0.25
         return car_controls
 
-def calculate_distance(self):
-    prev_timestamp = self.timestamp
-    self.timestamp = self.car_state.timestamp
-    time = (self.timestamp - prev_timestamp) / 1000000000
-    distance = (self.car_state.speed) * time / 2
+def calculate_distance(prev_speed, speed, prev_timestamp, timestamp):
+    time = (timestamp - prev_timestamp) / 1000000000
+    distance = (prev_speed+speed) * time / 2
     return distance
 
 
 # connect to the AirSim simulator
 client = airsim.CarClient()
 client.confirmConnection()
-# client.enableApiControl(False)
+client.enableApiControl(False)
 car_controls = airsim.CarControls()
 
 agent = RandomAgent()
@@ -72,7 +70,7 @@ while True:
     if collision_info.has_collided:
         print("Collision. Reset Environment.")
         distance = 0
-        client.reset()
+        #client.reset()
 
     prev_timestamp = timestamp
     prev_speed = speed
