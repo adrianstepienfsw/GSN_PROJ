@@ -21,14 +21,14 @@
 				"NumberOfChannels": 16,
 				"RotationsPerSecond": 30,
 				"PointsPerSecond": 10000,
-				"X": 0, "Y": 0, "Z": -1,
+				"X": 0, "Y": 0, "Z": -2,
 				"Roll": 0, "Pitch": 0, "Yaw" : 0,
 				"VerticalFOVUpper": -5,
 				"VerticalFOVLower": -25,
 				"HorizontalFOVStart": 0,
 				"HorizontalFOVEnd": 360,
-				"DataFrame": "VehicleInertialFrame",
-				"DrawDebugPoints": true
+				"DataFrame": "SensorLocalFrame",
+				"DrawDebugPoints": false
 			}
 		},
       "DefaultVehicleState": "",
