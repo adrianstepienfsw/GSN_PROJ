@@ -145,6 +145,8 @@ class AirSimEnv(BaseEnv):
             reward = reward_dist + reward_speed - 0.5
 
         done = 0
+        if (abs(car_pt[0])>800) or (abs(car_pt[1])>800):
+            done = 1
         if dist > 20:
             done = 1
         #if self.car_controls.brake == 0:
@@ -230,8 +232,8 @@ class AirSimEnv(BaseEnv):
     def setup_car(self):
         self.car.reset()
         pose = []
-        rand = np.random.randint(3)
-        #pose.append(airsim.Pose(airsim.Vector3r(23, -83, -0.2), airsim.to_quaternion(0, 0, -1.5)))  # PRY in radians
+        rand = np.random.randint(4)
+        pose.append(airsim.Pose(airsim.Vector3r(23, -83, -0.2), airsim.to_quaternion(0, 0, -1.5)))  # PRY in radians
         pose.append(airsim.Pose(airsim.Vector3r(-52, -400, -0.2), airsim.to_quaternion(0, 0, 1.5)))  # PRY in radians
         pose.append(airsim.Pose(airsim.Vector3r(-52, -280, -0.2), airsim.to_quaternion(0, 0, 1.5)))  # PRY in radians
         pose.append(airsim.Pose(airsim.Vector3r(106, -101, -0.2), airsim.to_quaternion(0, 0, 3.5)))  # PRY in radians
