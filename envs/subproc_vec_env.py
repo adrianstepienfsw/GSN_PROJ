@@ -23,8 +23,9 @@ def worker(remote, env_fn_wrapper):
         elif cmd == 'get_spaces':
             remote.send((env.get_action_space(), env.get_observation_space()))
         elif cmd == 'monitor':
-            is_monitor, is_train, experiment_dir, record_video_every = data
-            env.monitor(is_monitor, is_train, experiment_dir, record_video_every)
+            pass
+            # is_monitor, is_train, experiment_dir, record_video_every = data
+            # env.monitor(is_monitor, is_train, experiment_dir, record_video_every)
         elif cmd == 'render':
             env.render()
         else:
