@@ -26,6 +26,7 @@ class AirSimEnv(BaseEnv):
         self.distances = []
         self.timestamp = self.car_state.timestamp
         self.action_space = spaces.Discrete(6)
+        # self.action_space = spaces.Discrete(15) # WIĘCEJ AKCJI
         self.observation_space = spaces.Discrete(6)
         self.lidar_range = 15
         self.action = None
@@ -256,6 +257,35 @@ class AirSimEnv(BaseEnv):
             self.car_controls.steering = 0.25
         elif action == 4:
             self.car_controls.steering = -0.25
+        # elif action == 3:
+        #     self.car_controls.steering = 0.33
+        # elif action == 4:
+        #     self.car_controls.steering = -0.33
+        # elif action == 5:
+        #     self.car_controls.steering = 0.166
+        # elif action == 6:
+        #     self.car_controls.steering = -0.166
+        # elif action == 7:
+        #     self.car_controls.steering = 0
+        #     self.car_controls.throttle = 0.25
+        # elif action == 8:
+        #     self.car_controls.steering = 0.5
+        #     self.car_controls.throttle = 0.25
+        # elif action == 9:
+        #     self.car_controls.steering = -0.5
+        #     self.car_controls.throttle = 0.25
+        # elif action == 10:
+        #     self.car_controls.steering = 0.33
+        #     self.car_controls.throttle = 0.25
+        # elif action == 11:
+        #     self.car_controls.steering = -0.33
+        #     self.car_controls.throttle = 0.25
+        # elif action == 12:
+        #     self.car_controls.steering = 0.166
+        #     self.car_controls.throttle = 0.25
+        # elif action == 13:
+        #     self.car_controls.steering = -0.166
+        #     self.car_controls.throttle = 0.25
         else:
             self.car_controls.brake = 1
             self.car_controls.throttle = 0
