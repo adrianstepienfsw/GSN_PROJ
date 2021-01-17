@@ -77,11 +77,11 @@ class AirSimEnv(BaseEnv):
                 lidar_points = self.process_lidar_data(lidar)
                 lidar_matrix = self.change_lidar_points_to_matrix(lidar_points, width)
 
-        responses = self.car.simGetImages([airsim.ImageRequest("0", airsim.ImageType.Scene, False, False)])
-        response = responses[0]
-        img1d = np.fromstring(response.image_data_uint8, dtype=np.uint8)
-        img_rgb = img1d.reshape(response.height, response.width, 3)
-        image_state = self.transform_obs(img_rgb)
+        # responses = self.car.simGetImages([airsim.ImageRequest("0", airsim.ImageType.Scene, False, False)])
+        # response = responses[0]
+        # img1d = np.fromstring(response.image_data_uint8, dtype=np.uint8)
+        # img_rgb = img1d.reshape(response.height, response.width, 3)
+        # image_state = self.transform_obs(img_rgb)
 
         self.car_state = self.car.getCarState()
         collision = self.car.simGetCollisionInfo().has_collided
@@ -90,10 +90,11 @@ class AirSimEnv(BaseEnv):
         self.state["pose"] = self.car_state.kinematics_estimated
         self.state["collision"] = collision
 
-        x = lidar_matrix.reshape([width, width, 1])
-        y = image_state
+        # x = lidar_matrix.reshape([width, width, 1])
+        # y = image_state
 
-        return np.concatenate((x, y), axis=2)
+        # return np.concatenate((x, y), axis=2)
+        return lidar_matrix.reshape([width, width, 1])
 
     def render(self):
         pass
