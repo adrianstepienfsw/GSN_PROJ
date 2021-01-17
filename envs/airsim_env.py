@@ -76,6 +76,13 @@ class AirSimEnv(BaseEnv):
             if (len(lidar.point_cloud) / 3) > 500:
                 lidar_points = self.process_lidar_data(lidar)
                 lidar_matrix = self.change_lidar_points_to_matrix(lidar_points, width)
+
+        responses = self.car.simGetImages([airsim.ImageRequest("0", airsim.ImageType.Scene, False, False)])
+        response = responses[0]
+        img1d = np.fromstring(response.image_data_uint8, dtype=np.uint8)
+        img_rgb = img1d.reshape(response.height, response.width, 3)
+        image_state = self.transform_obs(img_rgb)
+
         self.car_state = self.car.getCarState()
         collision = self.car.simGetCollisionInfo().has_collided
 
@@ -83,7 +90,10 @@ class AirSimEnv(BaseEnv):
         self.state["pose"] = self.car_state.kinematics_estimated
         self.state["collision"] = collision
 
-        return lidar_matrix.reshape([width, width, 1])
+        x = lidar_matrix.reshape([width, width, 1])
+        y = image_state
+
+        return np.concatenate((x, y), axis=2)
 
     def render(self):
         pass
@@ -159,6 +169,14 @@ class AirSimEnv(BaseEnv):
         #print("Reward, dist, done: ",reward ,dist ,done)
         #print("Reward, reward_dist, reward_speed", reward, reward_dist, reward_speed)
         return reward, done
+    
+    def transform_obs(self, img2d):
+        from PIL import Image
+
+        image = Image.fromarray(img2d)
+        im_final = np.array(image.resize((20, 20)).convert("L"))
+
+        return im_final.reshape([20, 20, 1])
 
     def process_lidar_data(self, data):
         points = np.array(data.point_cloud, dtype=np.dtype('f4'))
