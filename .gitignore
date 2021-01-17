@@ -131,3 +131,10 @@ dmypy.json
 # hello_car.py
 py1.pfm
 py1.png
+
+experiments/
+gsn-proj/
+tb_logs/
+videos/
+logs/
+.vscode/
