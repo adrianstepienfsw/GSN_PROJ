@@ -102,7 +102,11 @@ class A2C:
     @staticmethod
     def env_name_parser(env_name):
         from envs.airsim_env import AirSimEnv
-        envs_to_class = {'AirSimEnv': AirSimEnv}
+        from envs.airsim_env_more_actions import AirSimEnv_MA
+        from envs.airsim_env_cam import AirSimEnvCAM
+        envs_to_class = {'AirSimEnv': AirSimEnv,
+                         'AirSimEnv_MA': AirSimEnv_MA,
+                         'AirSimEnv_CAM': AirSimEnvCAM}
 
         if env_name in envs_to_class:
             return envs_to_class[env_name]
